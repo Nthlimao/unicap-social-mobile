@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { Button } from 'react-native-elements';
-import { Icon } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 import { useNavigation } from 'react-navigation-hooks';
 import { logout } from '../../providers/auth';
 
