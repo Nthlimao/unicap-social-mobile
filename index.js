@@ -7,10 +7,16 @@ import { name as appName } from './app.json';
 
 import client from './src/services/apollo';
 
-const MyApp = () => (
-    <ApolloProvider client={client}>
-        <App/>
-    </ApolloProvider>
-);
+import { registerCustomIconType } from 'react-native-elements';
+import Icon from './src/helpers/custom.icon';
+
+const MyApp = () => {
+    registerCustomIconType("feather", Icon);
+    return (
+        <ApolloProvider client={client}>
+            <App/>
+        </ApolloProvider>
+    )
+};
 
 AppRegistry.registerComponent(appName, () => MyApp);
