@@ -1,11 +1,11 @@
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, ApolloLink, HttpLink } from "apollo-boost";
-// import auth from '../auth';
+import { getToken } from '../providers/auth';
 
-const httpLink = new HttpLink({ uri: '' });
+const httpLink = new HttpLink({ uri: 'http://192.168.0.106:4000/' });
 
 const authLink = new ApolloLink((operation, forward) => {
-    const token = '';
+    const token = getToken();
   
     operation.setContext({
       headers: {

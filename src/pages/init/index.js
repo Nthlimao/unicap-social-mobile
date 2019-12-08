@@ -8,8 +8,12 @@ export default Init = () => {
     const [ token, setToken ] = useState(undefined);
 
     useEffect(() => {
-        const token = getToken();
-        setToken(token);
+        async function getAsync() {
+            const token = await getToken();
+            setToken(token);
+        }
+
+        getAsync();
     }, []);
 
     if(token !== undefined) {

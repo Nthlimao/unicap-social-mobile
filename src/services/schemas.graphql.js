@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
-export const LOGIN = gql`
-    query Login($matricula: String!, $digito: String!, $senha: String!) {
+const LOGIN = gql`
+    mutation Login($matricula: String!, $digito: String!, $senha: String!) {
         login(matricula: $matricula, digito: $digito, senha: $senha) {
             session
             token
@@ -13,4 +13,8 @@ export const LOGIN = gql`
             }
         }
     }
-`
+`;
+
+export default {
+    LOGIN
+}
