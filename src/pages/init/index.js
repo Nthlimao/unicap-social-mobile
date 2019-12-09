@@ -3,6 +3,7 @@ import { useNavigation } from 'react-navigation-hooks';
 import { View, Text } from 'react-native';
 import { getToken } from '../../providers/auth';
 
+
 export default Init = () => {
     const { navigate } = useNavigation();
     const [ token, setToken ] = useState(undefined);

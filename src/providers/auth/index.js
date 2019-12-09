@@ -1,8 +1,8 @@
 import { AsyncStorage } from 'react-native';
+import { setSession } from '../session';
 
 const USER_KEY = '65fcd078ba8f144a26339c8c44e3c42b';
 
-// SALVAR SESSION
 const read = () => {
     return new Promise((resolve, reject) => {
         AsyncStorage.getItem(USER_KEY, (error, result) => {
@@ -58,10 +58,11 @@ export const isLoggedIn = async() => {
 }
 
 export const login = async(data) => {
-    const { student, token } = data;
+    const { student, token, session } = data;
     student.token = token;
 
     await write(student);
+    await setSession(session);
 }
 
 export const logout = async() => {

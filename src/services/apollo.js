@@ -1,23 +1,22 @@
 import { ApolloClient } from 'apollo-client';
-import { InMemoryCache, ApolloLink, HttpLink } from "apollo-boost";
 import { getToken } from '../providers/auth';
+import { setContext } from 'apollo-link-context';
+import { InMemoryCache, HttpLink, from, } from "apollo-boost";
 
 const httpLink = new HttpLink({ uri: 'http://192.168.0.106:4000/' });
 
-const authLink = new ApolloLink((operation, forward) => {
-    const token = getToken();
-  
-    operation.setContext({
+const authMiddleware = setContext(operation =>
+  getToken().then((token) => {
+    return {
       headers: {
         authorization: token ? `Bearer ${token}` : ''
       }
-    });
-  
-    return forward(operation);
-});
+    };
+  })
+);
 
 const client = new ApolloClient({    
-    link: authLink.concat(httpLink),
+    link: from([authMiddleware, httpLink]),
     cache: new InMemoryCache(),
 });
 

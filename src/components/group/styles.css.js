@@ -4,7 +4,8 @@ const styles = StyleSheet.create({
     group: {
         flexDirection:'row',
         alignItems: 'flex-start',
-        marginBottom: 20,
+        marginBottom: 25,
+        height: 65,
     },
     avatar: {
         fontSize: 24,
@@ -36,10 +37,9 @@ const styles = StyleSheet.create({
         fontSize: 11,
         color: '#c2c2c2',
         fontFamily: 'Segoeui-Regular',
-        marginBottom: 5,
+        marginBottom: 10,
     },
     badge: {
-        fontFamily: 'Segoeui-Regular',
         backgroundColor: '#7c1214',
     }
 });

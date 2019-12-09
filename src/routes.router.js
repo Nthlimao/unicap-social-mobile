@@ -8,8 +8,10 @@ import {
 
 import Init from './pages/init';
 import Login from './pages/login';
+import Loading from './pages/loading';
 import Main from './pages/main';
 import Chat from './pages/chat';
+import Subscribe from './pages/subscribe';
 import One from './pages/one';
 import Two from './pages/two';
 
@@ -39,7 +41,8 @@ const TabStack = createBottomTabNavigator({
 );
 
 const AppStack = createStackNavigator({
-    Main: TabStack
+    Tab: TabStack,
+    Subscribe
 },{
     transitionConfig,
 });
@@ -52,6 +55,7 @@ const AuthStack = createStackNavigator({
 
 const Switch = createSwitchNavigator({
     Init, 
+    Loading,
     App: AppStack,
     Auth: AuthStack
 },{

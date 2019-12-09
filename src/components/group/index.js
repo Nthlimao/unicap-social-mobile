@@ -9,7 +9,7 @@ const Group = ({ item }) => {
         <View style={styles.group}>
             <Avatar
                 rounded
-                size={60}
+                size={65}
                 activeOpacity={0.7}
                 title={item.sigla}
                 titleStyle={styles.avatar}
