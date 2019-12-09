@@ -32,6 +32,7 @@
     "react-native-config": "^0.12.0",
     "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "^1.5.2",
+    "react-native-loading-spinner-overlay": "^1.0.1",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "3.0.0-rc.5",
     "react-navigation-hooks": "^1.1.0",

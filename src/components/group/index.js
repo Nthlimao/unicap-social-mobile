@@ -11,14 +11,14 @@ const Group = ({ item }) => {
                 rounded
                 size={65}
                 activeOpacity={0.7}
-                title={item.sigla}
+                title={item.initial}
                 titleStyle={styles.avatar}
                 overlayContainerStyle={{backgroundColor: '#c2c2c2'}}
                 onPress={() => console.log("Works!")}
             />
             <View style={styles.header}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.subtitle}>{item.description}</Text>
+                <Text style={styles.title}>{item.name}</Text>
+                <Text style={styles.subtitle}>{item.code}</Text>
             </View>
             <View style={styles.options}>
                 <Text style={styles.date}>08/12/2019</Text>

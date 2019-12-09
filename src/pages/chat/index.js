@@ -2,9 +2,10 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { View, Text, FlatList } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
+import { useNavigation } from 'react-navigation-hooks';
+import Spinner from 'react-native-loading-spinner-overlay';
 import Group from '../../components/group';
 import schemas from '../../services/schemas.graphql';
-import { useNavigation } from 'react-navigation-hooks';
 
 import css from '../../helpers/default.css';
 
@@ -19,19 +20,23 @@ const TabIcon = (props) => (
 
 export default Chat = () => {
     const { navigate } = useNavigation();
-    const { data, loading, error, refetch } = useQuery(schemas.GET_SUBSCRIBES);
-    const chats = [];
+    const { data, loading, error, refetch } = useQuery(schemas.GET_CHATS);
+    let chats = [];
 
     const handleAdd = () =>{
         navigate('Subscribe');
     }
 
     if(loading === false && data !== undefined) {
-        console.log(data);
+        const { subjects } = data;
+        chats = subjects;
     }
     
     return (
         <View style={css.container}>
+            <Spinner
+                visible={loading}
+            />
             <View style={css.header}>
                 <Text style={css.headerTitle}>Mensagens</Text>
                 <Button 

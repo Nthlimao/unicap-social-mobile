@@ -41,7 +41,8 @@ const GET_CHATS = gql`
             _id,
             name,
             code,
-            class
+            class,
+            initial
         }
     }
 `;
@@ -57,9 +58,21 @@ const GET_SUBSCRIBES = gql`
     }
 `;
 
+const SUBSCRIPTION = gql`
+    mutation Subscription($subject: ID!) {
+        subscription(subject: $subject) {
+            _id,
+            name,
+            code,
+            class 
+        }
+    }
+`;
+
 export default {
     LOGIN,
     SYNC,
     GET_CHATS,
-    GET_SUBSCRIBES
+    GET_SUBSCRIBES,
+    SUBSCRIPTION
 }

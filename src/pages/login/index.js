@@ -44,7 +44,7 @@ export default Login = () => {
     if(loading === false && data !== undefined) {
         const { login: { token, session }} = data;
         login(data.login);
-        navigate('App');
+        navigate('Loading');
     }
 
     return (
