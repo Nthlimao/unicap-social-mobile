@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems: 'flex-start',
         marginBottom: 25,
-        height: 65,
+        height: 55,
     },
     avatar: {
         fontSize: 24,
@@ -13,10 +13,12 @@ const styles = StyleSheet.create({
     },
     header: {
         flex: 1,
+        justifyContent: 'space-between',
         paddingLeft: 15,
         paddingRight: 10,
         paddingTop: 5,
-        paddingBottom: 5
+        paddingBottom: 5,
+        height: 55,
     },  
     title: {
         fontSize: 14,

@@ -12,6 +12,7 @@ import Loading from './pages/loading';
 import Main from './pages/main';
 import Chat from './pages/chat';
 import Subscribe from './pages/subscribe';
+import Message from './pages/message';
 import One from './pages/one';
 import Two from './pages/two';
 
@@ -42,7 +43,8 @@ const TabStack = createBottomTabNavigator({
 
 const AppStack = createStackNavigator({
     Tab: TabStack,
-    Subscribe
+    Subscribe,
+    Message
 },{
     transitionConfig,
 });

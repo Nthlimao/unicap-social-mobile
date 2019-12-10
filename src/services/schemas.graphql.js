@@ -42,7 +42,14 @@ const GET_CHATS = gql`
             name,
             code,
             class,
-            initial
+            initial,
+            message {
+                value,
+                created_at,
+                sender {
+                name
+                }
+            }
         }
     }
 `;
@@ -69,10 +76,24 @@ const SUBSCRIPTION = gql`
     }
 `;
 
+const GET_MESSAGES = gql`
+    query Messages($chat: ID!) {
+        messages(chat: $chat) {
+            _id
+            value,
+            created_at,
+            sender {
+                name
+            }
+        }
+    }
+`;
+
 export default {
     LOGIN,
     SYNC,
     GET_CHATS,
     GET_SUBSCRIBES,
-    SUBSCRIPTION
+    SUBSCRIPTION,
+    GET_MESSAGES
 }
