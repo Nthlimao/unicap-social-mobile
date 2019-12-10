@@ -3,7 +3,7 @@ import { getToken } from '../providers/auth';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache, HttpLink, from, } from "apollo-boost";
 
-const httpLink = new HttpLink({ uri: 'http://192.168.0.106:4000/' });
+const httpLink = new HttpLink({ uri: 'https://unicap-social.herokuapp.com/' });
 
 const authMiddleware = setContext(operation =>
   getToken().then((token) => {
