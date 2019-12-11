@@ -23,6 +23,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         borderTopRightRadius: 10,
         borderTopLeftRadius: 10
+    },
+    footer: {
+        height: 60,
+        backgroundColor: '#FFFFFF',
     }
 });
 

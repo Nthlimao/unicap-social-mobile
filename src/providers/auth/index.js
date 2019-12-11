@@ -49,6 +49,14 @@ export const getToken = async() => {
         : null;
 }
 
+export const getId = async() => {
+    const user = await read();
+
+    return (user && user._id) 
+        ? user._id
+        : null;
+}
+
 export const isLoggedIn = async() => {
     const user = await read();
 

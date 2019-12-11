@@ -6,6 +6,7 @@ const LOGIN = gql`
             session
             token
             student {
+                _id
                 name
                 matriculation
                 digit
@@ -83,6 +84,21 @@ const GET_MESSAGES = gql`
             value,
             created_at,
             sender {
+                _id
+                name
+            }
+        }
+    }
+`;
+
+const SEND = gql`
+    mutation Send($chat: ID!, $message: String!) {
+        send(chat: $chat, message: $message) {
+            _id
+            value,
+            created_at,
+            sender {
+                _id
                 name
             }
         }
@@ -95,5 +111,6 @@ export default {
     GET_CHATS,
     GET_SUBSCRIBES,
     SUBSCRIPTION,
-    GET_MESSAGES
+    GET_MESSAGES,
+    SEND
 }
