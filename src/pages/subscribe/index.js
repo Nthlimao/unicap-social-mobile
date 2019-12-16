@@ -3,14 +3,14 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { View, Text, FlatList } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import Spinner from 'react-native-loading-spinner-overlay';
-import schemas from '../../services/schemas.graphql';
+import { SUBSCRIPTION, GET_SUBSCRIBES } from '../../services/schemas.graphql';
 
 import css from '../../helpers/default.css';
 import styles from './styles.css';
 
 export default Subscribe = () => {
-    const [submit, subscription] = useMutation(schemas.SUBSCRIPTION);
-    const { data, loading, error } = useQuery(schemas.GET_SUBSCRIBES);
+    const [submit, subscription] = useMutation(SUBSCRIPTION);
+    const { data, loading, error } = useQuery(GET_SUBSCRIBES);
     let chats = [];
 
     if(loading === false && data !== undefined) {
