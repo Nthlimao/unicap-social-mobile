@@ -3,11 +3,11 @@ import { useMutation } from '@apollo/react-hooks';
 import { useNavigation } from 'react-navigation-hooks';
 import { View, Text } from 'react-native';
 import { getSession, setSession } from '../../providers/session';
-import schemas from '../../services/schemas.graphql';
+import { SYNC } from '../../services/schemas.graphql';
 
 export default Init = () => {
     const { navigate } = useNavigation();
-    const [submit, { data, loading, error }] = useMutation(schemas.SYNC);
+    const [submit, { data, loading, error }] = useMutation(SYNC);
 
     useEffect(() => {
         async function getAsync() {

@@ -21,6 +21,39 @@ const styles = StyleSheet.create({
         fontFamily: 'Barlow-Bold',
         letterSpacing: 0.3
     },
+    footerSend: {
+        flexDirection: 'row',
+        paddingLeft: 15,
+        paddingRight: 15,
+        paddingTop: 5,
+        paddingBottom: 5,
+        alignItems: 'center'
+    },
+    input: {
+        flex: 1,
+        backgroundColor: '#F9F9F9',
+        elevation: 1,
+        paddingLeft: 15,
+        paddingRight: 15,
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderRadius: 25,
+        fontFamily: 'Segoeui-Regular',
+        fontSize: 14,
+        marginRight: 10
+    },
+    btn: {
+        backgroundColor: '#7c1214',
+        height: 45,
+        width: 45,
+        borderRadius: 50,
+        elevation: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    wrap: {
+        alignItems: 'baseline'
+    },
     sender: {
         fontFamily: 'Segoeui-Regular',
         fontSize: 13,
@@ -29,9 +62,6 @@ const styles = StyleSheet.create({
         textTransform: 'capitalize',
         marginBottom: 5,
         marginLeft: 2
-    },
-    wrap: {
-        alignItems: 'baseline'
     },
     message: {
         flexDirection: 'row',
@@ -71,36 +101,6 @@ const styles = StyleSheet.create({
         color: '#c2c2c2',
         lineHeight: 11,
     },
-    footerSend: {
-        flexDirection: 'row',
-        paddingLeft: 15,
-        paddingRight: 15,
-        paddingTop: 5,
-        paddingBottom: 5,
-        alignItems: 'center'
-    },
-    input: {
-        flex: 1,
-        backgroundColor: '#F9F9F9',
-        elevation: 1,
-        paddingLeft: 15,
-        paddingRight: 15,
-        paddingTop: 10,
-        paddingBottom: 10,
-        borderRadius: 25,
-        fontFamily: 'Segoeui-Regular',
-        fontSize: 14,
-        marginRight: 10
-    },
-    btn: {
-        backgroundColor: '#7c1214',
-        height: 45,
-        width: 45,
-        borderRadius: 50,
-        elevation: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
 })
 
 export default styles;

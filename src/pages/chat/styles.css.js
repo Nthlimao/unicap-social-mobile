@@ -29,6 +29,12 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'Segoeui-Regular',
     },
+    subtitleName: {
+        color: '#c2c2c2',
+        fontSize: 14,
+        fontFamily: 'Segoeui-Regular',
+        textTransform: 'capitalize',
+    },
     options: {
         paddingTop: 5,
         paddingBottom: 5,

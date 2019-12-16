@@ -1,46 +1,62 @@
 import React, { useState, useEffect } from 'react';
-import { getId } from '../../providers/auth';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import { View, Text, FlatList, TextInput } from 'react-native';
+import { useQuery, useMutation, useSubscription } from '@apollo/react-hooks';
+
+// @import elements
+import { View, Text, TextInput, FlatList } from 'react-native';
 import { Avatar, Button, Icon } from 'react-native-elements';
 import Spinner from 'react-native-loading-spinner-overlay';
-import schemas from '../../services/schemas.graphql';
 
+// @import services
+import { GET_MESSAGES, SET_MESSAGE, CHAT_CHANNEL } from '../../services/schemas.graphql';
+import { getId } from '../../providers/auth';
+
+// @import styles
 import css from '../../helpers/default.css';
 import styles from './styles.css';
 
 export default Message = ({ navigation }) => {
+    let list = []
+    // @get navigation
     const { state: { params: { chat }} } = navigation;
-    const [ variables, setVariables ] = useState({ chat: chat._id, message: '' });  
-    const [ id, setId ] = useState(undefined);
-    const [submit, sent] = useMutation(schemas.SEND);
-    const { data, loading, error } = useQuery(schemas.GET_MESSAGES, {
-        variables: {
-            chat: chat._id,
+    
+    // @use states
+    const [ variables, setVariables ] = useState({ chat: chat._id, message: '' });
+    const [ storage, setStorage ] = useState({});
+    
+    // @use graphql calls
+    const { data, loading, error } = useQuery(GET_MESSAGES, { variables: { chat: chat._id }});
+    list = data?.messages || [];
+
+    const subscription = useSubscription(CHAT_CHANNEL, {
+        onSubscriptionData({ subscriptionData }) {
+            const { data: { messageSent } } = subscriptionData;
+            list.push(messageSent);
         }
     });
+    const [ submit ] = useMutation(SET_MESSAGE);
+
+
 
     useEffect(() => {
         async function getAsync() {
             const id = await getId();
-            setId(id);
+            setStorage(storage => ({ ...storage, id }));
         }
 
         getAsync();
     }, []);
-
+    
     const handleChange = (value, target) => {
         setVariables(variables => ({ ...variables, [target]: value }));
     }
 
     const handleSubmit = () => {
         submit({ variables });
+        setVariables(variables => ({ ...variables, ['message']: '' }));
     }
 
-    let msgs = [];
-
     const renderItem = ({ item }) => {
-        const isMe = id === item.sender._id;
+        const isMe = storage.id === item.sender.id;
 
         return (
             <View style={styles.wrap}>
@@ -52,18 +68,7 @@ export default Message = ({ navigation }) => {
                     <Text style={styles.date}>{item.created_at}</Text>
                 </View>
             </View> 
-        )
-    }
-
-    if(loading === false && data !== undefined && id !== undefined) {
-        const { messages } = data;
-        msgs = messages;
-    }
-
-    if(sent.loading === false && sent.data !== undefined && id !== undefined) {
-        handleChange('', 'message');
-        const { messages } = sent.data;
-        msgs = messages;
+        );
     }
 
     return (
@@ -89,11 +94,11 @@ export default Message = ({ navigation }) => {
                 <Text style={styles.headerTitle}>{chat.name}</Text>
             </View>
             <View style={css.content}>
-                <FlatList
-                    style={{padding: 15}}
-                    data={msgs}
-                    keyExtractor={item => item._id}
+                <FlatList 
+                    data={list} 
+                    style={{padding: 15}} 
                     renderItem={renderItem}
+                    keyExtractor={item => item.id} 
                 />
             </View>
             <View style={css.footer}>
@@ -114,9 +119,9 @@ export default Message = ({ navigation }) => {
                 </View>
             </View>
         </View>
-    )
-}
+    );
 
+}
 
 Message.navigationOptions = {
     headerLeft: null,

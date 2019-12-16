@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-const LOGIN = gql`
+export const LOGIN = gql`
     mutation Login($matricula: String!, $digito: String!, $senha: String!) {
         login(matricula: $matricula, digito: $digito, senha: $senha) {
             session
@@ -16,7 +16,7 @@ const LOGIN = gql`
     }
 `;
 
-const SYNC = gql`
+export const SYNC = gql`
     mutation Sync($session: String!){
         sync(session: $session){
             session,
@@ -36,7 +36,7 @@ const SYNC = gql`
     }
 `;
 
-const GET_CHATS = gql`
+export const GET_CHATS = gql`
     query Subjects {
         subjects {
             _id,
@@ -48,14 +48,14 @@ const GET_CHATS = gql`
                 value,
                 created_at,
                 sender {
-                name
+                    name
                 }
             }
         }
     }
 `;
 
-const GET_SUBSCRIBES = gql`
+export const GET_SUBSCRIBES = gql`
     query Subscribes {
         subscribes {
             _id,
@@ -66,7 +66,7 @@ const GET_SUBSCRIBES = gql`
     }
 `;
 
-const SUBSCRIPTION = gql`
+export const SUBSCRIPTION = gql`
     mutation Subscription($subject: ID!) {
         subscription(subject: $subject) {
             _id,
@@ -77,40 +77,60 @@ const SUBSCRIPTION = gql`
     }
 `;
 
-const GET_MESSAGES = gql`
+export const GET_MESSAGES = gql`
     query Messages($chat: ID!) {
         messages(chat: $chat) {
-            _id
+            id: _id,
             value,
             created_at,
             sender {
-                _id
+                id: _id,
                 name
             }
         }
     }
 `;
 
-const SEND = gql`
-    mutation Send($chat: ID!, $message: String!) {
+export const SEND_MESSAGE = gql`
+    mutation SendMessage($chat: ID!, $message: String!) {
         send(chat: $chat, message: $message) {
-            _id
+            value
+        }
+    }
+`;
+
+export const SENT_MESSAGE = gql`
+    query Sent($chat: ID!, $message: String!) {
+        sent(chat: $chat, message: $message) {
+            value
+        }
+    }
+`
+
+export const SET_MESSAGE = gql`
+    mutation Message($chat: ID!, $message: String!) {
+        message(chat: $chat, message: $message) {
+            id: _id,
             value,
             created_at,
             sender {
-                _id
+                id: _id,
                 name
             }
         }
     }
 `;
 
-export default {
-    LOGIN,
-    SYNC,
-    GET_CHATS,
-    GET_SUBSCRIBES,
-    SUBSCRIPTION,
-    GET_MESSAGES,
-    SEND
-}
+export const CHAT_CHANNEL = gql`
+  subscription onMessageSent {
+    messageSent {
+        id: _id,
+        value,
+        created_at,
+        sender {
+            id: _id,
+            name
+        }
+    }
+  }
+`;

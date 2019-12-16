@@ -5,14 +5,14 @@ import { useMutation } from '@apollo/react-hooks';
 import { useNavigation } from 'react-navigation-hooks';
 import { login } from '../../providers/auth';
 import { getErrorGraphql } from '../../helpers/error.helper';
-import schemas from '../../services/schemas.graphql';
+import { LOGIN } from '../../services/schemas.graphql';
 import styles from './styles.css';
 
 const background = require('../../assets/images/bg_unicap.jpg');
 
 export default Login = () => {
     const [ variables, setVariables ] = useState({ matricula: '', digito: '', senha: '' });  
-    const [submit, { data, loading, error }] = useMutation(schemas.LOGIN);
+    const [submit, { data, loading, error }] = useMutation(LOGIN);
     const { navigate } = useNavigation();
 
     let message = '';

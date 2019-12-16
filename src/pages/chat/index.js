@@ -1,11 +1,16 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useSubscription } from '@apollo/react-hooks';
+import { useNavigation } from 'react-navigation-hooks';
+
+// @import elements
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { Button, Icon, Avatar, Badge } from 'react-native-elements';
-import { useNavigation } from 'react-navigation-hooks';
 import Spinner from 'react-native-loading-spinner-overlay';
-import schemas from '../../services/schemas.graphql';
 
+// @import services
+import { GET_CHATS, CHAT_CHANNEL } from '../../services/schemas.graphql';
+
+// @import styles
 import css from '../../helpers/default.css';
 import styles from './styles.css';
 
@@ -19,16 +24,20 @@ const TabIcon = (props) => (
 );
 
 export default Chat = () => {
-    const { navigate } = useNavigation();
-    const { data, loading, error, refetch } = useQuery(schemas.GET_CHATS);
     let chats = [];
+    const { navigate } = useNavigation();
+    const { data, loading, error, refetch } = useQuery(GET_CHATS);
+    const subscription = useSubscription(CHAT_CHANNEL, {
+        onSubscriptionData({}) {
+            refetch();
+        }
+    });
 
     const handleAdd = () =>{
         navigate('Subscribe');
     }
 
     const handleMessage = (item) => {
-        console.log('press')
         navigate('Message', { chat: item });
     }
 
@@ -51,7 +60,10 @@ export default Chat = () => {
                 <View style={styles.header}>
                     <Text style={styles.title}>{item.name}</Text>
                     {item.message &&
-                        <Text style={styles.subtitle}>{item.message.sender.name}: {item.message.value}</Text>
+                        <View style={{flexDirection: 'row'}}>
+                            <Text style={styles.subtitleName}>{((item.message.sender.name).split(" "))[0]}: </Text>
+                            <Text style={styles.subtitle}>{item.message.value}</Text>
+                        </View>
                     }
                 </View>
                 <View style={styles.options}>
