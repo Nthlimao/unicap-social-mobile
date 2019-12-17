@@ -8,7 +8,7 @@ import { Button, Icon, Avatar, Badge } from 'react-native-elements';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 // @import services
-import { GET_CHATS, CHAT_CHANNEL } from '../../services/schemas.graphql';
+import { GET_CHATS, CHAT_CHANNEL, SUBJECT_SUBSCRIBED } from '../../services/schemas.graphql';
 
 // @import styles
 import css from '../../helpers/default.css';
@@ -28,6 +28,11 @@ export default Chat = () => {
     const { navigate } = useNavigation();
     const { data, loading, error, refetch } = useQuery(GET_CHATS);
     const subscription = useSubscription(CHAT_CHANNEL, {
+        onSubscriptionData({}) {
+            refetch();
+        }
+    });
+    const subscribed = useSubscription(SUBJECT_SUBSCRIBED, {
         onSubscriptionData({}) {
             refetch();
         }

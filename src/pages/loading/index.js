@@ -1,6 +1,7 @@
 import React, { useEffect  } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { useNavigation } from 'react-navigation-hooks';
+import Spinner from 'react-native-loading-spinner-overlay';
 import { View, Text } from 'react-native';
 import { getSession, setSession } from '../../providers/session';
 import { SYNC } from '../../services/schemas.graphql';
@@ -33,9 +34,11 @@ export default Init = () => {
 
     return (
         <View>
-            <View>
-                <Text>Loading...</Text>
-            </View>
+            <Spinner
+                overlayColor={'#7c1214'}
+                textContent={'Sincronizando...'}
+                visible={true}
+            />
         </View>
     )
 }

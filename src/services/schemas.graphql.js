@@ -121,6 +121,25 @@ export const SET_MESSAGE = gql`
     }
 `;
 
+export const GET_SCHEDULE = gql`
+    mutation Schedule($session: String!){
+        schedule(session: $session){
+            session,
+            schedules {
+                title
+                grade {
+                schedule
+                    subject {
+                        name
+                        code
+                    }
+                }
+            }
+        }
+    }
+`;
+
+
 export const CHAT_CHANNEL = gql`
   subscription onMessageSent {
     messageSent {
@@ -131,6 +150,14 @@ export const CHAT_CHANNEL = gql`
             id: _id,
             name
         }
+    }
+  }
+`;
+
+export const SUBJECT_SUBSCRIBED = gql`
+  subscription onSubjectSubscribed {
+    subjectSubscribed {
+        response
     }
   }
 `;

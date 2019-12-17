@@ -8,7 +8,8 @@ import { split } from 'apollo-link';
 
 
 const wsLink = new WebSocketLink({
-  uri: 'ws://unicap-social.herokuapp.com',
+  uri: 'wss://unicap-social.herokuapp.com',
+  // uri: 'ws://192.168.0.106:4000/',
   options: {
     reconnect: true
   }
@@ -16,6 +17,7 @@ const wsLink = new WebSocketLink({
 
 const httpLink = new HttpLink({ 
   uri: 'https://unicap-social.herokuapp.com' 
+  // uri: 'http://192.168.0.106:4000/' 
 });
 
 const link = split(({ query }) => {

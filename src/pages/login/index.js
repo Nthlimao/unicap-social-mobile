@@ -41,10 +41,13 @@ export default Login = () => {
         submit({ variables });
     }
 
-    if(loading === false && data !== undefined) {
-        const { login: { token, session }} = data;
-        login(data.login);
+    const authenticate = async(data) => {
+        await login(data);
         navigate('Loading');
+    }
+
+    if(loading === false && data !== undefined) {
+        authenticate(data.login);
     }
 
     return (

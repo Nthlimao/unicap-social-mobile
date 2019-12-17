@@ -13,13 +13,13 @@ import Main from './pages/main';
 import Chat from './pages/chat';
 import Subscribe from './pages/subscribe';
 import Message from './pages/message';
-import One from './pages/one';
+import Schedule from './pages/schedule';
 import Two from './pages/two';
 
 const TabStack = createBottomTabNavigator({
     Main: Main,
     Chat: Chat,
-    One: One,
+    Schedule: Schedule,
     Two: Two,
 }, {
     navigationOptions: {

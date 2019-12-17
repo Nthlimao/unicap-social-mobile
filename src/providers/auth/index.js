@@ -1,5 +1,6 @@
 import { AsyncStorage } from 'react-native';
-import { setSession } from '../session';
+import { setSession, removeSession } from '../session';
+import { removeGrade } from '../schedule';
 
 const USER_KEY = '65fcd078ba8f144a26339c8c44e3c42b';
 
@@ -74,5 +75,7 @@ export const login = async(data) => {
 }
 
 export const logout = async() => {
+    await removeSession();
+    await removeGrade();
     return await clear();
 }

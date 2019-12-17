@@ -1,14 +1,14 @@
 import { AsyncStorage } from 'react-native';
 
-const SESSION_KEY = '03c664d79ef6b2777062fdba83ac92a8';
+const SCHEDULE_KEY = '8167b3293e8f6737da852189f9eb5691';
 
 const read = () => {
     return new Promise((resolve, reject) => {
-        AsyncStorage.getItem(SESSION_KEY, (error, result) => {
+        AsyncStorage.getItem(SCHEDULE_KEY, (error, result) => {
             if(error) reject(null);
     
             const data = (result !== null) 
-                ? result
+                ? JSON.parse(result) || null
                 : null; 
 
             resolve(data);
@@ -16,9 +16,9 @@ const read = () => {
     });
 }
 
-const write = (value) => {
+const write = (values) => {
     return new Promise((resolve, reject) => {
-        AsyncStorage.setItem(SESSION_KEY, value, (error) => {
+        AsyncStorage.setItem(SCHEDULE_KEY, JSON.stringify(values), (error) => {
             if(error) return reject(false);
     
             resolve(true);
@@ -28,7 +28,7 @@ const write = (value) => {
 
 const clear = () => {
     return new Promise((resolve, reject) => {
-        AsyncStorage.removeItem(SESSION_KEY, (error) => {
+        AsyncStorage.removeItem(SCHEDULE_KEY, (error) => {
             if(error) return reject(false);
     
             resolve(true);
@@ -36,16 +36,15 @@ const clear = () => {
     })
 }
 
-export const setSession = async (session) =>{
-    await clear();
-    await write(session);
-}
-
-export const getSession = async () => {
+export const getGrade = async() => {
     return await read();
 }
 
+export const setGrade = async(grade) => {
+    await clear();
+    await write(grade);
+}
 
-export const removeSession = async() => {
+export const removeGrade = async() => {
     await clear();
 }
